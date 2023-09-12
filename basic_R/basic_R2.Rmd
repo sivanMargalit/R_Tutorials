@@ -1,0 +1,224 @@
+---
+title: "R Data Sructures"
+author: "Sivan Margalit"
+date: "`r Sys.Date()`"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This is very quick practice on vectors, matrix, lists and data.frame to remind the basic usage
+
+## Vectors, Matrics and Arrays
+
+### Vectors 
+one dimension array of items , **all** of same class </br>
+
+given vector vec_1
+```{r define-vector, echo=FALSE}
+vec1 <-sample(-100:100, 20, replace = TRUE)
+```
+in the next code box :</br>
+<ul>
+<li> check which data type the elements in the vector</li>
+<li> the size of the vector </li>
+<li> summarize the vector </li>
+<li> print the values in the 1st, 3rd, 6th places</li>
+</ul>
+
+```{r vector-functions, exercise=TRUE, exercise.lines = 9 }
+# 1. check which data type the elements in the vector (use function class)
+
+# 2. check the size of the vector (use length function)
+
+# 3. summarise vector values distributon (use summary function)
+
+# 4. print the values in the 1st, 3rd, 6th places (use operator [ ])
+
+```
+```{r vector-functions-solution}
+# 1. check which data type the elements in the vector (use function class)
+class(vec_1)
+# 2. check the size of the vector (use length function)
+length(vec_1)
+# 3. summaries vector values distributon (use summary function)
+summary(vec_1)
+# 4. print the values in the 1st, 3rd, 6th places (use operator [ ])
+vec_1[c(1, 3, 6)]
+```
+ icalture")    # vector of textual values
+
+c((1:5) < 3)    # vector of logical values
+
+```
+### matrix
+2 dimensions array of items. **all** of same class 
+
+```{r create-matrix, echo=TRUE}
+# matrix(...) function generate  vector
+
+matrix(1:27, nrow=3) # matrix of integers, in 3 rows
+
+matrix(letters, ncol=3)    # matrix of characters (textuals)
+
+```
+### array
+array of items, in any dimensions. **all** of same class 
+
+```{r create-array, echo=TRUE}
+# array(...) function generate  array
+
+array(1:28, dim=c(7,2,2)) # array of integers: 7 rows, 2 columns, 2 blocks
+
+array(1:28, dim=c(2,7,2)) # same values but different structur: 2 rows, 7 columns, 2 blocks
+
+```
+### practices
+
+
+#### <u>numerics</u>
+numeric values without decimal point called <b>integers</b> </br>
+we can use the functions
+<ul>
+<li>is.numeric () to check if value is numeric</li>
+<li>is.integer() to check if value is integer</li>
+</ul>
+
+for example:
+```{r check-numeric, echo = TRUE}
+x <- 4.5
+
+is.numeric(x)
+
+is.integer(x)
+```
+now, your turn : assign an <u>integer</u> to variable y and validate
+
+```{r check-integer, exercise=TRUE}
+y <- 
+is.numeric(y)
+
+is.integer(y)
+```
+
+<div id="check-integer-hint">
+**Hint#1:** integers are numbers without decimal points (e.g : 11, -7, 5 )
+</div>
+
+#### <u>characters</u>
+characters values are textual. those values must be surrounded by double quote ("..") or single quote ('...') </br>
+<ul>
+<li>is.character () check if value type is characters</li>
+</ul>
+
+For example : assign to x a character values and validate it 
+```{r check-character,  exercise=TRUE}
+x <- 
+
+is.character(x)
+```
+
+
+#### <u>logical</u>
+logical values are TRUE/FALSE (called also booleans). </br>
+for example: is.numeric() function returns a logical value
+<ul>
+<li>is.logical() check if value is type logic' i.e. TRUE/FALSE</li>
+</ul>
+
+For example : assign to z a logical values and validate it 
+```{r check-logical, exercise=TRUE }
+x <- 4<3
+# add here a validation if x is logical
+
+```
+
+### Check yourself
+
+```{r question-character-1, echo=FALSE}
+question("wich of the following variable is character?",
+  answer("A<-'8'", correct = TRUE),
+  answer("B<-8"),
+  answer("C<-'eight'", correct = TRUE),
+  answer("D<-TRUE"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+```{r question-character-2, echo=FALSE}
+i <- sample(1:3, 1)
+values.lst<-list("'3'"="3",
+                 "3"=3,
+                 "'three'"="tree")
+xText<-names(values.lst)[i]
+xValue<-values.lst[[i]]
+
+questionText <-sprintf("given x = %s. what expected result of the command is.character(x) :", xText)
+question(questionText,
+  answer(sprintf("%s", ifelse(!is.character(xValue),"TRUE", "FALSE")), correct = FALSE),
+  answer(sprintf("%s", ifelse(is.character(xValue),"TRUE", "FALSE")), correct = TRUE),
+  answer(xValue, correct = FALSE),
+  answer("error message", correct = FALSE),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+
+```{r question-character-3, echo=FALSE}
+z <- 33.4
+is.numeric(z)
+
+question("given x = 33.4. what expected result of the command is.numeric(z) ",
+  answer("TRUE", correct = TRUE),
+  answer("FALSE"),
+  answer("33.4"),
+  answer("error message"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+## Topic 2
+
+### Exercise with Hint
+
+*Here's an exercise where the chunk is pre-evaluated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
+mtcars
+```
+
+```{r print-limit-hint}
+head(mtcars)
+```
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```
+

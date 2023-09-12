@@ -1,0 +1,188 @@
+---
+title: "R Basic Data Types"
+author: "Sivan Margalit"
+date: "`r Sys.Date()`"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Basic Data Types
+In this tutorial we focus on 4 basic data types (or classes), used by R : .
+<ul>
+<li> numeric </li>
+<li> character </li>
+<li> logical </li>
+<li> dateTime </li>
+</ul>
+
+
+ give example 3 first data types: 
+ check your example with the function class(...) (write your example between the Parenthesis)
+```{r data-type-example, exercise=TRUE,  exercise.lines = 7 }
+# Example of Numeric value 
+class( )
+
+# Example of character value 
+
+# Example of logical value 
+
+```
+### numerics
+numeric values without decimal point called <b>integers</b> </br>
+we can use the functions
+<ul>
+<li>is.numeric () to check if value is numeric</li>
+<li>is.integer() to check if value is integer</li>
+</ul>
+
+for example:
+```{r check-numeric, echo = TRUE}
+x <- 4.5
+
+is.numeric(x)
+
+is.integer(x)
+```
+now, your turn : assign an <u>integer</u> to variable y and validate
+
+```{r check-integer,  exercise=TRUE}
+y <- 
+is.numeric(y)
+
+is.integer(y)
+```
+
+<div id="check-integer-hint">
+**Hint#1:** integers are numbers without decimal points (e.g : 11, -7, 5 )
+</div>
+
+### characters
+characters values are textual. those values must be surrounded by double quote ("..") or single quote ('...') </br>
+<ul>
+<li>is.character () check if value type is characters</li>
+</ul>
+
+For example : assign to x a character values and validate it 
+```{r check-character,  exercise=TRUE}
+x <- 
+
+is.character(x)
+```
+
+
+### logical
+logical values are TRUE/FALSE (called also booleans). </br>
+<ul>
+<li>is.logical() check if value is type logic' i.e. TRUE/FALSE</li>
+</ul>
+for example: is.numeric() function returns a logical value. </br>
+another exampleL  assign to z a logical expression (4<3). add validation if it indeed logical
+```{r check-logical, exercise=TRUE }
+z <- 4<3
+# add here a validation if x is logical
+
+```
+```{r check-logical-solution }
+z <- 4<3
+# add here a validation if x is logical
+
+is.logival(z)  #validate with is.logical() 
+
+class(z) #another validation: check z class ()
+```
+### Date and dateTime
+<ul>
+<li>
+<b>Date</b> values should be convert from text, use the function as.Date()
+```{r convert-date, echo=TRUE }
+dd <- as.Date("2022-01-01")
+dd
+```
+In the example above a variable dd assigned to Date value</br>
+even though it displayed as a text (character), it is actually a Date.</br>
+lets validate it
+```{r check-date, exercise=TRUE }
+dd <- as.Date("2022-01-01")
+# check here if dd is a character 
+
+# check here the class of dd  
+
+```
+```{r check-date-solution}
+dd <- as.Date("2022-01-01")
+# check here if dd is a character 
+is.character(dd)
+# check here the class of dd  
+class(dd)
+
+```
+</li>
+
+<li>
+<b>POSIXct</b> is special class contains date and time together
+```{r convert-dateTime, echo=TRUE }
+dt <- as.POSIXct("2022-01-01 10:15")
+dt
+class(dt)
+```
+It is easy to extract date from POSIXct, using as.Date()
+```{r dateTime-to-Date, echo=TRUE}
+dt <- as.POSIXct("2022-01-01 10:15")
+dt
+as.Date(dt)
+```
+</li>
+
+
+## Check yourself
+
+```{r question-character-1, echo=FALSE}
+question("which of the following variable is character?",
+  answer("A<-'8'", correct = TRUE),
+  answer("B<-8"),
+  answer("C<-'eight'", correct = TRUE),
+  answer("D<-TRUE"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  try_again_button = "Try Again"
+)
+```
+
+```{r question-character-2, echo=FALSE}
+i <- sample(1:3, 1)
+values.lst<-list("'3'"="3",
+                 "3"=3,
+                 "'three'"="three")
+xText<-names(values.lst)[i]
+xValue<-values.lst[[i]]
+
+questionText <-sprintf("given x = %s. what expected result of the command is.character(x) :", xText)
+question(questionText,
+  answer(sprintf("%s", ifelse(!is.character(xValue),"TRUE", "FALSE")), correct = FALSE),
+  answer(sprintf("%s", ifelse(is.character(xValue),"TRUE", "FALSE")), correct = TRUE),
+  answer(xValue, correct = FALSE),
+  answer("error message", correct = FALSE),
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  try_again_button = "Try Again"
+)
+```
+
+
+```{r question-character-3, echo=FALSE}
+
+question('given y = "2020-12-17". what expected result of the command class(y) ',
+  answer("Date", correct = TRUE),
+  answer("FALSE"),
+  answer("33.4"),
+  answer("error message"),
+  allow_retry = TRUE,
+  random_answer_order = TRUE,
+  try_again_button = "Try Again"
+)
+```
